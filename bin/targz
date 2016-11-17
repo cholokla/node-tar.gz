@@ -26,10 +26,14 @@ commander
   .description('Compress the source directory into the target tarball')
   .option('-l, --level', 'Compression level', 6)
   .option('-m, --memlevel', 'Memory level used during compression', 6)
+  .option('-b, --frombase', 'Do not include top level directory', false)
   .action(function(source, target, options) {
     targz({
       memLevel: options.memlevel,
       level: options.level
+    },
+    {
+      fromBase: options.frombase
     }).compress(source, target, function(err) {
       if (err)
         throw err;
